@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <el-link>
-      a
-    </el-link>
-  </div>
+  <div>a</div>
 </template>
 
 <script>

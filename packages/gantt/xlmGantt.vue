@@ -14,7 +14,7 @@ export default {
   props: {
     createdIsNeed: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     title: {
@@ -56,8 +56,6 @@ export default {
         },
       ],
     },
-
-   
   },
 
   data() {
@@ -69,14 +67,29 @@ export default {
   },
 
   mounted() {
-    if (this.createdIsNeed) {
-      this.$nextTick(() => {
-        this.init();
-      });
-    }
+    // if (this.createdIsNeed) {
+    //   this.$nextTick(() => {
+    //     this.init();
+    //   });
+    // }
   },
 
   methods: {
+    rerender(data) {
+      this.tasks.data = data;
+
+      this.$nextTick(() => {
+        this.init();
+      });
+    },
+
+    renderGantt(data) {
+      Array.isArray(data) ? (this.tasks.data = data) : (this.tasks = data);
+      this.$nextTick(() => {
+        this.init();
+      });
+    },
+
     init() {
       gantt.config.work_time = true;
       gantt.config.date_format = "%Y-%m-%d %H-%i";
@@ -99,11 +112,13 @@ export default {
       gantt.plugins({
         tooltip: true,
       });
+
       gantt.templates.task_text = function (start, end, task) {
         return `${dayjs(start).format("HH:mm")}~${dayjs(end).format(
           "HH:mm"
         )} 司机：${task.driver}`;
       };
+
       gantt.init(this.$refs.gantt);
       gantt.parse(this.tasks);
 
@@ -134,6 +149,10 @@ export default {
       gantt.refreshData();
       this.$emit("onClear");
     },
+  },
+
+  destroyed() {
+    gantt.destructor();
   },
 };
 </script>
