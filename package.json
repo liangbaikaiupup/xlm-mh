@@ -1,6 +1,6 @@
 {
   "name": "xlm-mh",
-  "version": "0.5.0",
+  "version": "0.8.0",
   "private": false,
   "main": "lib/xlm-mh.umd.min.js",
   "scripts": {

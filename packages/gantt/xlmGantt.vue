@@ -6,7 +6,7 @@
 
 <script>
 import { gantt } from "dhtmlx-gantt";
-import "dhtmlx-gantt/codebase/dhtmlxgantt.css"
+import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
 import dayjs from "dayjs";
 export default {
   name: "xlmGantt",
@@ -75,7 +75,7 @@ export default {
   },
 
   methods: {
-    renderGantt(data) {
+    render(data) {
       Array.isArray(data) ? (this.tasks.data = data) : (this.tasks = data);
       this.$nextTick(() => {
         this.init();
@@ -133,14 +133,16 @@ export default {
       };
     },
 
-    clear() {
-      gantt.clearAll();
-      gantt.config.start_date = dayjs(this.date).format("YYYY-MM-DD 00:00");
-      gantt.config.end_date = dayjs(this.date).format("YYYY-MM-DD 23:59");
-      gantt.parse(this.tasks);
-      gantt.render();
-      gantt.refreshData();
-      this.$emit("onClear");
+    rerender() {
+      this.$nextTick(() => {
+        gantt.clearAll();
+        gantt.config.start_date = dayjs(this.date).format("YYYY-MM-DD 00:00");
+        gantt.config.end_date = dayjs(this.date).format("YYYY-MM-DD 23:59");
+        gantt.parse(this.tasks);
+        gantt.render();
+        gantt.refreshData();
+        this.$emit("rerender");
+      });
     },
   },
 
@@ -189,6 +191,4 @@ export default {
 ::v-deep .gantt_task_row.gantt_selected .gantt_task_cell {
   border-right-color: #ebebeb;
 }
-
-
 </style>

@@ -1,3 +1,12 @@
 node_modules
 
+# npm publish 发布时打开
+# /src
+# /packages
+# packages.json
+# packages-lock.json
+# vue.config.js
+
+
+# github
 /lib
