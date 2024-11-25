@@ -6,7 +6,7 @@
 
 <script>
 import { gantt } from "dhtmlx-gantt";
-import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
+import "dhtmlx-gantt/codebase/dhtmlxgantt.css"
 import dayjs from "dayjs";
 export default {
   name: "xlmGantt",
@@ -52,7 +52,7 @@ export default {
           name: "vehicleSeat",
           label: "座位数",
           align: "center",
-          width: 120,
+          max_width: 120,
         },
       ],
     },
@@ -95,6 +95,7 @@ export default {
       ];
       gantt.config.start_date = dayjs(this.date).format("YYYY-MM-DD 00:00");
       gantt.config.end_date = dayjs(this.date).format("YYYY-MM-DD 23:59");
+      gantt.config.types.milestone = "milestone";
       gantt.config.columns = this.columns;
       gantt.config.autofit = true;
       gantt.config.fit_tasks = true;
@@ -188,4 +189,6 @@ export default {
 ::v-deep .gantt_task_row.gantt_selected .gantt_task_cell {
   border-right-color: #ebebeb;
 }
+
+
 </style>

@@ -2,16 +2,17 @@
   <div id="app">
     <h3>mmmhh...</h3>
     <xlmOfficeView></xlmOfficeView>
-    <xlmGantt></xlmGantt>
+    <xlmGantt ref="gantt"></xlmGantt>
   </div>
 </template>
 
 <script>
-
-
 export default {
   name: "App",
   components: {},
+  mounted(){
+    this.$refs['gantt'].renderGantt([])
+  }
 };
 </script>
 
