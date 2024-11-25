@@ -75,14 +75,6 @@ export default {
   },
 
   methods: {
-    rerender(data) {
-      this.tasks.data = data;
-
-      this.$nextTick(() => {
-        this.init();
-      });
-    },
-
     renderGantt(data) {
       Array.isArray(data) ? (this.tasks.data = data) : (this.tasks = data);
       this.$nextTick(() => {
